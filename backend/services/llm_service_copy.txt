@@ -1,0 +1,29 @@
+"""
+llm_service.py
+"""
+
+from backend.llm.clients.ollama_client import (
+    OllamaClient
+)
+
+
+class LLMService:
+
+    def __init__(
+        self,
+        ollama_client: OllamaClient
+    ):
+        self.client = ollama_client
+
+    def generate_response(
+        self,
+        prompt: str
+    ) -> str:
+
+        response = (
+            self.client.llm.invoke(
+                prompt
+            )
+        )
+
+        return response.content

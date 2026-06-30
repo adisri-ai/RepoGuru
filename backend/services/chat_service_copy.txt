@@ -1,0 +1,72 @@
+"""
+chat_service.py
+"""
+class ChatService:
+
+    def __init__(self):
+
+        self.messages = []
+
+    def add_user_message(
+        self,
+        message: str
+    ):
+
+        self.messages.append(
+            {
+                "role": "user",
+                "content": message
+            }
+        )
+
+    def add_ai_message(
+        self,
+        message: str
+    ):
+
+        self.messages.append(
+            {
+                "role": "assistant",
+                "content": message
+            }
+        )
+
+    def get_history(
+        self
+    ):
+
+        return self.messages
+
+    def clear(
+        self
+    ):
+
+        self.messages.clear()
+    def get_recent_history(
+        self,
+        limit: int
+    ):
+
+        history = []
+
+        for msg in self.messages[-limit:]:
+
+            if msg["role"] == "user":
+
+                history.append(
+                    {
+                        "role" : "user" , 
+                        "content"  : msg["content"]
+                    }
+                )
+
+            else:
+
+                history.append(
+                    {
+                        "role" : "assistant",
+                        "content" : msg["content"]
+                    }
+                )
+
+        return history
